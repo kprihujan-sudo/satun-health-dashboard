@@ -256,7 +256,7 @@ export default function Home() {
               interpretation={thaiLabels.leHaleGapAnalysis.interpretation}
             />
 
-            <LEHALEGapVisualization data={le_hale_trend} />
+            {le_hale_trend && <LEHALEGapVisualization leHaleTrend={le_hale_trend} />}
           </div>
         )}
 
@@ -313,12 +313,12 @@ export default function Home() {
                 'โรคที่มี Share_DALY_% สูง = โรคที่ส่งผลกระทบต่อสุขภาพมากที่สุด'
               ]}
             />
-            <DiseaseDetailsChart data={diseases} />
+            {diseases && <DiseaseDetailsChart data={diseases} />}
           </div>
         )}
 
         {/* Disease Group Analysis Tab */}
-        {activeTab === 'disease-group' && (
+        {activeTab === 'disease-groups' && (
           <div className="space-y-8">
             <h1 className="text-3xl font-bold text-gray-800 font-poppins">
               📊 Disease Group Analysis (วิเคราะห์กลุ่มโรค)
@@ -332,12 +332,12 @@ export default function Home() {
                 'อุบัติเหตุ = การบาดเจ็บจากการตกลง การชน เป็นต้น'
               ]}
             />
-            <DiseaseGroupAnalysis data={diseases} />
+            {diseases && <DiseaseGroupAnalysis diseases={diseases} />}
           </div>
         )}
 
         {/* Average Age at Death Tab */}
-        {activeTab === 'avg-age' && (
+        {activeTab === 'average-age' && (
           <div className="space-y-8">
             <h1 className="text-3xl font-bold text-gray-800 font-poppins">
               👥 Average Age at Death (อายุเฉลี่ยที่เสียชีวิต)
@@ -351,7 +351,7 @@ export default function Home() {
                 'ควรให้ความสำคัญกับโรคที่ทำให้ผู้คนเสียชีวิตในวัยหนุ่มสาว'
               ]}
             />
-            <AverageAgeChart data={diseases} />
+            {specific_diseases && <AverageAgeChart diseases={specific_diseases} />}
           </div>
         )}
 
@@ -370,7 +370,7 @@ export default function Home() {
                 'ใช้ในการประเมินผลของโปรแกรมสุขภาพ'
               ]}
             />
-            <MortalityTrends data={diseases} />
+            {le_hale_trend && <MortalityTrends leHaleTrend={le_hale_trend} />}
           </div>
         )}
 
@@ -408,12 +408,12 @@ export default function Home() {
                 'อำเภอที่อยู่มุมซ้ายล่าง = มีความเสี่ยงต่ำ'
               ]}
             />
-            <DistrictComparison data={districts} />
+            {districts && <DistrictComparison districts={districts} />}
           </div>
         )}
 
         {/* Disease × District Matrix Tab */}
-        {activeTab === 'disease-district-matrix' && (
+        {activeTab === 'disease-matrix' && (
           <div className="space-y-8">
             <h1 className="text-3xl font-bold text-gray-800 font-poppins">
               🔗 Disease × District Matrix (เมทริกซ์โรค × อำเภอ)
@@ -428,7 +428,7 @@ export default function Home() {
                 'ช่วยในการระบุโรคที่ส่งผลกระทบต่ออำเภอต่างๆ'
               ]}
             />
-            <DiseaseDistrictMatrix data={disease_district_matrix} />
+            {disease_district_matrix && <DiseaseDistrictMatrix data={disease_district_matrix} />}
           </div>
         )}
 
@@ -447,7 +447,7 @@ export default function Home() {
                 'สามารถเรียงลำดับตามจำนวนผู้เสียชีวิต DALY เป็นต้น'
               ]}
             />
-            <SpecificDiseasesTable data={specific_diseases} />
+            {specific_diseases && <SpecificDiseasesTable data={specific_diseases} />}
           </div>
         )}
 
@@ -467,7 +467,7 @@ export default function Home() {
                 'ข้อมูลอื่นๆ = ข้อมูลที่ไม่สามารถจำแนกได้'
               ]}
             />
-            <MOPHGroupsTable data={moph_groups} />
+            {moph_groups && <MOPHGroupsTable data={moph_groups} />}
           </div>
         )}
       </main>

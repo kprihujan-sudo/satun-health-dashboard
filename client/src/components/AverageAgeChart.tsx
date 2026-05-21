@@ -16,9 +16,19 @@ interface AverageAgeChartProps {
 }
 
 export function AverageAgeChart({ diseases }: AverageAgeChartProps) {
+  if (!diseases || diseases.length === 0) {
+    return (
+      <Card className="border-0 shadow-md">
+        <CardContent className="pt-6">
+          <p className="text-center text-gray-500">No data available</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   // Top 20 diseases by deaths for better visualization
   const topDiseases = diseases
-    .sort((a, b) => b.Deaths - a.Deaths)
+    .sort((a, b) => (b.Deaths || 0) - (a.Deaths || 0))
     .slice(0, 20);
 
   const chartData = topDiseases.map(d => ({
