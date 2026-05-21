@@ -16,8 +16,12 @@ import { MortalityTrends } from '@/components/MortalityTrends';
 import { DistrictComparison } from '@/components/DistrictComparison';
 import { LEHALEGapVisualization } from '@/components/LEHALEGapVisualization';
 import { ExportPDF } from '@/components/ExportPDF';
-import { DataComparison } from '@/components/DataComparison';
-import { YearSelector } from '@/components/YearSelector';
+import { SummaryStatistics } from '@/components/SummaryStatistics';
+import { AlertBanner } from '@/components/AlertBanner';
+import { RankingTable } from '@/components/RankingTable';
+import { AnalysisDescription } from '@/components/AnalysisDescription';
+import { DistrictMap } from '@/components/DistrictMap';
+import { thaiLabels } from '@/data/thai-labels';
 import { Spinner } from '@/components/ui/spinner';
 
 /**
@@ -29,10 +33,7 @@ import { Spinner } from '@/components/ui/spinner';
  */
 export default function Home() {
   const [activeTab, setActiveTab] = useState<MenuTab>('overview');
-  const [comparisonYear1, setComparisonYear1] = useState(2567);
-  const [comparisonYear2, setComparisonYear2] = useState(2568);
   const { data, loading, error } = useHealthData();
-  const availableYears = [2562, 2563, 2564, 2565, 2566, 2567, 2568];
 
   if (loading) {
     return (
@@ -75,13 +76,96 @@ export default function Home() {
               year={overview.year}
             />
 
+            {/* Alert Banner */}
+            <AlertBanner alerts={[
+              {
+                level: 'critical',
+                title: '⚠️ ระดับความเสี่ยงวิกฤต',
+                message: 'อำเภอเมืองสตูล ละงู และทุ่งหว้า มีอัตรา DALY สูงกว่า 13,300 ต่อ 100,000 คน',
+                detail: 'ต้องมีการเพิ่มโปรแกรมสุขภาพเฉพาะเจาะจงเพื่อลดภาระโรค'
+              },
+              {
+                level: 'warning',
+                title: '📊 ข้อมูลที่ต้องสนใจ',
+                message: 'มะเร็งเป็นโรคที่มีภาระโรค (DALY) สูงสุด คิดเป็น 17.21% ของภาระโรคทั้งหมด',
+                detail: 'ควรให้ความสำคัญกับการป้องกันและรักษามะเร็ง'
+              }
+            ]} />
+
+            {/* Analysis Description */}
+            <AnalysisDescription
+              title="ภาพรวมสถานะสุขภาพจังหวัดสตูล"
+              description={thaiLabels.overview}
+              keyPoints={[
+                `จำนวนผู้เสียชีวิต: ${overview.deaths.toLocaleString()} คน`,
+                `ภาระโรค (DALY): ${overview.daly_total.toLocaleString()} ปี`,
+                `อายุคาดเฉลี่ย (LE - Life Expectancy): ${overview.le} ปี`,
+                `อายุคาดเฉลี่ยที่มีสุขภาพดี (HALE - Healthy Life Expectancy): ${overview.hale} ปี`,
+                `ช่องว่าง LE-HALE: ${(overview.le - overview.hale).toFixed(2)} ปี (ปีที่มีความพิการ)`
+              ]}
+              interpretation="จังหวัดสตูลมีภาระโรคที่สูง โดยเฉพาะในอำเภอเมืองสตูล ละงู และทุ่งหว้า ที่มีอัตรา DALY สูงกว่า 13,000 ต่อ 100,000 คน ซึ่งแสดงว่าประชากรมีปัญหาสุขภาพที่จำเป็นต้องได้รับการดูแลอย่างเร่งด่วน"
+            />
+
+            {/* Summary Statistics */}
+            <SummaryStatistics
+              title="สรุปสถิติสำคัญ"
+              description="ข้อมูลหลักของสุขภาพประชากรจังหวัดสตูล"
+              stats={[
+                { label: 'ผู้เสียชีวิต', value: overview.deaths, unit: 'คน' },
+                { label: 'DALY (ภาระโรค)', value: Math.round(overview.daly_total), unit: 'ปี' },
+                { label: 'YLL (ปีชีวิตสูญเสีย)', value: Math.round(overview.yll_total), unit: 'ปี' },
+                { label: 'YLD (ปีพิการ)', value: Math.round(overview.yld_total), unit: 'ปี' }
+              ]}
+            />
+
+            {/* District Rankings */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <RankingTable
+                title="🔴 อำเภอที่มีความเสี่ยงสูงสุด"
+                type="top"
+                description="อำเภอที่มีอัตรา DALY สูงสุด (ภาระโรคมากที่สุด)"
+                items={districts
+                  .sort((a: any, b: any) => b.DALY_rate - a.DALY_rate)
+                  .slice(0, 5)
+                  .map((d: any, idx: number) => ({
+                    rank: idx + 1,
+                    name: d.District,
+                    value: d.DALY_rate,
+                    unit: 'ต่อ 100k'
+                  }))}
+              />
+              <RankingTable
+                title="🟢 อำเภอที่มีความเสี่ยงต่ำสุด"
+                type="bottom"
+                description="อำเภอที่มีอัตรา DALY ต่ำสุด (ภาระโรคน้อยที่สุด)"
+                items={districts
+                  .sort((a: any, b: any) => a.DALY_rate - b.DALY_rate)
+                  .slice(0, 5)
+                  .map((d: any, idx: number) => ({
+                    rank: idx + 1,
+                    name: d.District,
+                    value: d.DALY_rate,
+                    unit: 'ต่อ 100k'
+                  }))}
+              />
+            </div>
+
             <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 font-poppins">
-                  Disease Analysis
+                  🏥 Disease Analysis (การวิเคราะห์โรค)
                 </h2>
                 <ExportPDF elementId="disease-analysis-section" fileName="Disease_Analysis" title="Export Disease Analysis" />
               </div>
+              
+              {/* Analysis Description */}
+              <AnalysisDescription
+                title="การวิเคราะห์โรคที่ส่งผลกระทบต่อประชากร"
+                description={thaiLabels.diseaseAnalysis.description}
+                keyPoints={thaiLabels.diseaseAnalysis.keyPoints}
+                interpretation={thaiLabels.diseaseAnalysis.interpretation}
+              />
+
               <div id="disease-analysis-section" className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                 <div className="lg:col-span-2">
                   <DiseaseChart data={diseases} title="Top 10 Diseases by DALY Impact" />
@@ -112,25 +196,66 @@ export default function Home() {
                     <li className="flex items-start">
                       <span className="text-blue-600 font-bold mr-2">•</span>
                       <span>
-                        <strong>Life Expectancy:</strong> LE {overview.le.toFixed(2)} years, HALE {overview.hale.toFixed(2)} years
+                        <strong>Life Expectancy:</strong> LE {overview.le} years, HALE {overview.hale} years
                       </span>
                     </li>
                   </ul>
                 </div>
               </div>
-
-              <DiseaseTable data={diseases} title="Complete Disease Summary" />
+              <DiseaseTable data={diseases} />
             </section>
 
             <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 font-poppins">
-                  District Health Status
+                  🗺️ District Health Status (สถานะสุขภาพของแต่ละอำเภอ)
                 </h2>
                 <ExportPDF elementId="district-section" fileName="District_Health_Status" title="Export District Data" />
               </div>
-              <div id="district-section">
-                <DistrictTable data={districts} title="Health Metrics by District" />
+
+              {/* Analysis Description */}
+              <AnalysisDescription
+                title="สถานะสุขภาพของแต่ละอำเภอ"
+                description={thaiLabels.districtHealth.description}
+                keyPoints={thaiLabels.districtHealth.keyPoints}
+                interpretation={thaiLabels.districtHealth.interpretation}
+              />
+
+              <DistrictMap districts={districts.map((d: any) => ({
+                name: d.District,
+                dalyRate: d.DALY_rate,
+                deathRate: d.Death_rate,
+                population: d.Population
+              }))} />
+
+              <div id="district-section" className="mt-6">
+                <DistrictTable data={districts} />
+              </div>
+            </section>
+
+            {/* About This Dashboard */}
+            <section className="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-lg border-2 border-blue-200">
+              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-4">📊 About This Dashboard</h2>
+              <p className="text-gray-700 mb-3">
+                This comprehensive health dashboard presents data for Satun Province covering multiple dimensions of health status including mortality, disability, life expectancy, and disease burden. The dashboard integrates data from multiple sources and provides trend analysis for strategic health planning.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <h3 className="font-bold text-gray-800 mb-2">📋 Data Information:</h3>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li><strong>Data Source:</strong> Satun Province Health Department</li>
+                    <li><strong>Years Covered:</strong> 2562-2568</li>
+                    <li><strong>Last Updated:</strong> 2025</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-800 mb-2">📊 Developed by:</h3>
+                  <p className="text-sm text-gray-700">
+                    <strong>KASEM PRIHUJAN</strong><br />
+                    Digital Health Sub-division<br />
+                    Satun Provincial Health Office (สสจ.สตูล)
+                  </p>
+                </div>
               </div>
             </section>
           </div>
@@ -139,233 +264,254 @@ export default function Home() {
         {/* LE-HALE Gap Analysis Tab */}
         {activeTab === 'le-hale-gap' && (
           <div className="space-y-8">
-            <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                LE-HALE Gap Analysis
-              </h2>
-              <p className="text-gray-700">
-                Analysis of the gap between Life Expectancy (LE) and Healthy Life Expectancy (HALE) - years lived with disability or poor health
-              </p>
-            </div>
-            {le_hale_trend && le_hale_trend.length > 0 && (
-              <LEHALEGapVisualization leHaleTrend={le_hale_trend} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              ❤️ LE-HALE Gap Analysis (วิเคราะห์ช่องว่าง LE-HALE)
+            </h1>
+            
+            <AnalysisDescription
+              title={thaiLabels.leHaleGapAnalysis.title}
+              description={thaiLabels.leHaleGapAnalysis.description}
+              keyPoints={thaiLabels.leHaleGapAnalysis.keyPoints}
+              interpretation={thaiLabels.leHaleGapAnalysis.interpretation}
+            />
+
+            <LEHALEGapVisualization data={le_hale_trend} />
           </div>
         )}
 
         {/* LE/HALE Trend Tab */}
         {activeTab === 'le-hale-trend' && (
           <div className="space-y-8">
-            <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                Life Expectancy & Healthy Life Expectancy Trend Analysis
-              </h2>
-              <p className="text-gray-700">
-                7-year historical data (2562-2568) showing trends in life expectancy and healthy life expectancy by gender
-              </p>
-            </div>
-            {le_hale_trend && le_hale_trend.length > 0 && (
-              <LEHALETrendChart data={le_hale_trend} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              📈 LE/HALE Trend (7 Years) (แนวโน้ม LE/HALE 7 ปี)
+            </h1>
+            <AnalysisDescription
+              title="แนวโน้มการเปลี่ยนแปลง LE และ HALE"
+              description={thaiLabels.leHaleTrend}
+              keyPoints={[
+                'LE (Life Expectancy) = อายุคาดเฉลี่ย',
+                'HALE (Healthy Life Expectancy) = อายุคาดเฉลี่ยที่มีสุขภาพดี',
+                'ข้อมูลแยกตามเพศชาย-หญิง'
+              ]}
+            />
+            <LEHALETrendChart data={le_hale_trend} />
           </div>
         )}
 
         {/* Disease Summary Tab */}
         {activeTab === 'disease-summary' && (
           <div className="space-y-8">
-            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                Disease Summary
-              </h2>
-              <p className="text-gray-700">
-                Comprehensive overview of 14 major disease groups with mortality and morbidity data
-              </p>
-            </div>
-            <DiseaseChart data={diseases} title="Disease Burden by DALY" />
-            <DiseaseTable data={diseases} title="Disease Summary Table" />
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              🏥 Disease Summary (สรุปโรค)
+            </h1>
+            <AnalysisDescription
+              title="สรุปข้อมูลโรค 14 ชนิดที่สำคัญ"
+              description={thaiLabels.diseaseSummary}
+              keyPoints={[
+                'Deaths = จำนวนผู้เสียชีวิต',
+                'YLL (Years of Life Lost) = ปีชีวิตที่สูญเสียจากการตาย',
+                'YLD (Years Lived with Disability) = ปีชีวิตที่มีความพิการ',
+                'DALY (Disability-Adjusted Life Years) = ปีชีวิตที่สูญเสีย = YLL + YLD'
+              ]}
+            />
+            <DiseaseTable data={diseases} />
           </div>
         )}
 
         {/* Disease Details Tab */}
         {activeTab === 'disease-details' && (
           <div className="space-y-8">
-            <div className="bg-cyan-50 border-2 border-cyan-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                Disease Details
-              </h2>
-              <p className="text-gray-700">
-                Detailed analysis of each disease group with comprehensive statistics
-              </p>
-            </div>
-            {diseases && diseases.length > 0 && (
-              <DiseaseDetailsChart diseases={diseases} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              🔍 Disease Details (รายละเอียดโรค)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.diseaseDetails}
+              description="ข้อมูลรายละเอียดของแต่ละโรค พร้อมสถิติการตาย ปีชีวิตที่สูญเสีย และสัดส่วนของภาระโรค"
+              keyPoints={[
+                'Share_DALY_% = สัดส่วนของภาระโรคทั้งหมด',
+                'โรคที่มี Share_DALY_% สูง = โรคที่ส่งผลกระทบต่อสุขภาพมากที่สุด'
+              ]}
+            />
+            <DiseaseDetailsChart data={diseases} />
           </div>
         )}
 
         {/* Disease Group Analysis Tab */}
-        {activeTab === 'disease-groups' && (
+        {activeTab === 'disease-group' && (
           <div className="space-y-8">
-            <div className="bg-violet-50 border-2 border-violet-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                Disease Group Analysis
-              </h2>
-              <p className="text-gray-700">
-                Analysis of disease burden distribution and ranking by DALY impact
-              </p>
-            </div>
-            {diseases && diseases.length > 0 && (
-              <DiseaseGroupAnalysis diseases={diseases} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              📊 Disease Group Analysis (วิเคราะห์กลุ่มโรค)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.diseaseGroupAnalysis}
+              description="วิเคราะห์กลุ่มโรคตามการจำแนกประเภท เช่น โรคติดเชื้อ โรคไม่ติดเชื้อ และอุบัติเหตุ"
+              keyPoints={[
+                'โรคติดเชื้อ = โรคที่เกิดจากเชื้อโรค',
+                'โรคไม่ติดเชื้อ = โรคเรื้อรัง เช่น มะเร็ง ความดันโลหิตสูง',
+                'อุบัติเหตุ = การบาดเจ็บจากการตกลง การชน เป็นต้น'
+              ]}
+            />
+            <DiseaseGroupAnalysis data={diseases} />
           </div>
         )}
 
         {/* Average Age at Death Tab */}
-        {activeTab === 'average-age' && (
+        {activeTab === 'avg-age' && (
           <div className="space-y-8">
-            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                Average Age at Death
-              </h2>
-              <p className="text-gray-700">
-                Analysis of average age at death by disease and age group classification
-              </p>
-            </div>
-            {specific_diseases && specific_diseases.length > 0 && (
-              <AverageAgeChart diseases={specific_diseases} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              👥 Average Age at Death (อายุเฉลี่ยที่เสียชีวิต)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.averageAge}
+              description="อายุเฉลี่ยที่เสียชีวิตจำแนกตามโรค แสดงว่าโรคใดที่ทำให้ผู้คนเสียชีวิตในวัยต่างๆ"
+              keyPoints={[
+                'โรคที่มีอายุเฉลี่ยต่ำ = ทำให้ผู้คนเสียชีวิตในวัยหนุ่มสาว',
+                'โรคที่มีอายุเฉลี่ยสูง = ทำให้ผู้คนเสียชีวิตในวัยสูงอายุ',
+                'ควรให้ความสำคัญกับโรคที่ทำให้ผู้คนเสียชีวิตในวัยหนุ่มสาว'
+              ]}
+            />
+            <AverageAgeChart data={diseases} />
           </div>
         )}
 
         {/* Mortality Trends Tab */}
         {activeTab === 'mortality-trends' && (
           <div className="space-y-8">
-            <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                Mortality Trends
-              </h2>
-              <p className="text-gray-700">
-                7-year trend analysis of mortality patterns and health status indicators
-              </p>
-            </div>
-            {le_hale_trend && le_hale_trend.length > 0 && (
-              <MortalityTrends leHaleTrend={le_hale_trend} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              📉 Mortality Trends (แนวโน้มการตาย)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.mortalityTrends}
+              description="แนวโน้มการตายตามเวลา แสดงการเปลี่ยนแปลงของจำนวนผู้เสียชีวิตในแต่ละช่วงเวลา"
+              keyPoints={[
+                'ข้อมูลแสดงการเปลี่ยนแปลงของจำนวนผู้เสียชีวิตตามปี',
+                'ช่วยในการวางแผนสุขภาพและการจัดสรรทรัพยากร',
+                'ใช้ในการประเมินผลของโปรแกรมสุขภาพ'
+              ]}
+            />
+            <MortalityTrends data={diseases} />
           </div>
         )}
 
         {/* District Analysis Tab */}
         {activeTab === 'district-analysis' && (
           <div className="space-y-8">
-            <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                District Health Analysis
-              </h2>
-              <p className="text-gray-700">
-                Health metrics and risk assessment for all 7 districts in Satun Province
-              </p>
-            </div>
-            <DistrictTable data={districts} title="District Health Status" />
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              🗺️ District Analysis (วิเคราะห์อำเภอ)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.districtAnalysis}
+              description="วิเคราะห์สถานะสุขภาพของแต่ละอำเภอในจังหวัดสตูล พร้อมระดับความเสี่ยง"
+              keyPoints={[
+                'Death Rate (อัตราการตาย) = จำนวนผู้เสียชีวิตต่อ 100,000 คน',
+                'DALY Rate (อัตรา DALY) = ภาระโรคต่อ 100,000 คน',
+                'Risk Level (ระดับความเสี่ยง) = ปกติ เตือน ระวัง อันตราย วิกฤต'
+              ]}
+            />
+            <DistrictTable data={districts} />
           </div>
         )}
 
         {/* District Comparison Tab */}
         {activeTab === 'district-comparison' && (
           <div className="space-y-8">
-            <div className="bg-lime-50 border-2 border-lime-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                District Comparison
-              </h2>
-              <p className="text-gray-700">
-                Comparative analysis of health metrics across all districts with risk assessment
-              </p>
-            </div>
-            {districts && districts.length > 0 && (
-              <DistrictComparison districts={districts} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              ⚖️ District Comparison (เปรียบเทียบอำเภอ)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.districtComparison}
+              description="เปรียบเทียบสถิติสุขภาพระหว่างอำเภอต่างๆ ด้วย Scatter chart และ Risk assessment"
+              keyPoints={[
+                'Scatter chart แสดงความสัมพันธ์ระหว่าง Death Rate และ DALY Rate',
+                'อำเภอที่อยู่มุมขวาบน = มีความเสี่ยงสูง',
+                'อำเภอที่อยู่มุมซ้ายล่าง = มีความเสี่ยงต่ำ'
+              ]}
+            />
+            <DistrictComparison data={districts} />
           </div>
         )}
 
         {/* Disease × District Matrix Tab */}
-        {activeTab === 'disease-matrix' && (
+        {activeTab === 'disease-district-matrix' && (
           <div className="space-y-8">
-            <div className="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                Disease × District Matrix
-              </h2>
-              <p className="text-gray-700">
-                Heat map showing DALY impact of each disease across all districts
-              </p>
-            </div>
-            {disease_district_matrix && disease_district_matrix.length > 0 && (
-              <DiseaseDistrictMatrix data={disease_district_matrix} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              🔗 Disease × District Matrix (เมทริกซ์โรค × อำเภอ)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.diseaseDistrictMatrix}
+              description="แสดงความสัมพันธ์ระหว่างโรคและอำเภอ โดยใช้สีแสดงระดับภาระโรค (DALY)"
+              keyPoints={[
+                'สีแดง = DALY สูง (ภาระโรคมาก)',
+                'สีเหลือง = DALY ปานกลาง',
+                'สีเขียว = DALY ต่ำ (ภาระโรคน้อย)',
+                'ช่วยในการระบุโรคที่ส่งผลกระทบต่ออำเภอต่างๆ'
+              ]}
+            />
+            <DiseaseDistrictMatrix data={disease_district_matrix} />
           </div>
         )}
 
         {/* Specific Diseases Tab */}
         {activeTab === 'specific-diseases' && (
           <div className="space-y-8">
-            <div className="bg-pink-50 border-2 border-pink-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                Specific Diseases (ICD-10 Codes)
-              </h2>
-              <p className="text-gray-700">
-                Detailed analysis of 100 specific diseases with ICD-10 classification
-              </p>
-            </div>
-            {specific_diseases && specific_diseases.length > 0 && (
-              <SpecificDiseasesTable data={specific_diseases} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              🔬 Specific Diseases (โรคเฉพาะ)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.specificDiseases}
+              description="ข้อมูลโรคเฉพาะ 100 รหัส ICD-10 พร้อมสถิติครบถ้วน สามารถค้นหาและเรียงลำดับได้"
+              keyPoints={[
+                'ICD-10 = รหัสจำแนกโรคระหว่างประเทศ',
+                'สามารถค้นหาโรคตามชื่อ ICD-10 code',
+                'สามารถเรียงลำดับตามจำนวนผู้เสียชีวิต DALY เป็นต้น'
+              ]}
+            />
+            <SpecificDiseasesTable data={specific_diseases} />
           </div>
         )}
 
-        {/* MOPH Groups Tab */}
+        {/* MOPH Disease Groups Tab */}
         {activeTab === 'moph-groups' && (
           <div className="space-y-8">
-            <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
-                MOPH Disease Groups
-              </h2>
-              <p className="text-gray-700">
-                Disease classification according to Ministry of Public Health standards and ICD-10 chapters
-              </p>
-            </div>
-            {moph_groups && moph_groups.length > 0 && (
-              <MOPHGroupsTable data={moph_groups} />
-            )}
+            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
+              📋 MOPH Disease Groups (กลุ่มโรคสสส.)
+            </h1>
+            <AnalysisDescription
+              title={thaiLabels.mophGroups}
+              description="จำแนกโรคตามมาตรฐานของกระทรวงสาธารณสุข รวมถึง โรคติดเชื้อ โรคไม่ติดเชื้อ และอื่นๆ"
+              keyPoints={[
+                'โรคติดเชื้อ = โรคที่เกิดจากเชื้อโรค',
+                'โรคไม่ติดเชื้อ = โรคเรื้อรัง เช่น มะเร็ง ความดันโลหิตสูง',
+                'อุบัติเหตุและการบาดเจ็บ = ผลจากการตกลง การชน เป็นต้น',
+                'ข้อมูลอื่นๆ = ข้อมูลที่ไม่สามารถจำแนกได้'
+              ]}
+            />
+            <MOPHGroupsTable data={moph_groups} />
           </div>
         )}
-
-        {/* Footer */}
-        <section className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mt-12 mb-8">
-          <h3 className="text-lg font-bold text-gray-800 font-poppins mb-3">
-            About This Dashboard
-          </h3>
-          <p className="text-sm text-gray-700 mb-3">
-            This comprehensive health dashboard presents data for Satun Province covering multiple dimensions of health status including mortality, disability, life expectancy, and disease burden. The dashboard integrates data from multiple sources and provides trend analysis for strategic health planning.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-blue-200">
-            <div>
-              <p className="text-xs text-gray-600 font-semibold mb-2">📊 Developed by:</p>
-              <p className="text-sm text-gray-700 font-semibold">KASEM PRIHUJAN</p>
-              <p className="text-xs text-gray-600">Digital Health Sub-division</p>
-              <p className="text-xs text-gray-600">Satun Provincial Health Office (สสจ.สตูล)</p>
-            </div>
-            <div>
-              <p className="text-xs text-gray-600 font-semibold mb-2">📋 Data Information:</p>
-              <p className="text-xs text-gray-600"><strong>Data Source:</strong> Satun Province Health Department</p>
-              <p className="text-xs text-gray-600"><strong>Years Covered:</strong> 2562-2568</p>
-              <p className="text-xs text-gray-600"><strong>Last Updated:</strong> 2025</p>
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-6 px-4 text-center text-sm">
-        <p>&copy; 2025 Burden of Disease and Population Health Status Dashboard - Satun. All rights reserved.</p>
-        <p className="text-xs text-gray-400 mt-2">Developed by: KASEM PRIHUJAN | Digital Health Sub-division, Satun Provincial Health Office</p>
+      <footer className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-8 mt-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <h3 className="font-bold mb-2">📊 Dashboard Information</h3>
+              <p className="text-sm text-blue-100">Burden of Disease and Population Health Status Dashboard - Satun</p>
+            </div>
+            <div>
+              <h3 className="font-bold mb-2">📋 Data Source</h3>
+              <p className="text-sm text-blue-100">Satun Province Health Department</p>
+            </div>
+            <div>
+              <h3 className="font-bold mb-2">👤 Developed by</h3>
+              <p className="text-sm text-blue-100">KASEM PRIHUJAN | Digital Health Sub-division, Satun Provincial Health Office</p>
+            </div>
+          </div>
+          <div className="border-t border-blue-700 mt-6 pt-6 text-center text-sm text-blue-100">
+            <p>© 2025 Burden of Disease and Population Health Status Dashboard - Satun. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );
