@@ -15,6 +15,9 @@ import { AverageAgeChart } from '@/components/AverageAgeChart';
 import { MortalityTrends } from '@/components/MortalityTrends';
 import { DistrictComparison } from '@/components/DistrictComparison';
 import { LEHALEGapVisualization } from '@/components/LEHALEGapVisualization';
+import { ExportPDF } from '@/components/ExportPDF';
+import { DataComparison } from '@/components/DataComparison';
+import { YearSelector } from '@/components/YearSelector';
 import { Spinner } from '@/components/ui/spinner';
 
 /**
@@ -26,7 +29,10 @@ import { Spinner } from '@/components/ui/spinner';
  */
 export default function Home() {
   const [activeTab, setActiveTab] = useState<MenuTab>('overview');
+  const [comparisonYear1, setComparisonYear1] = useState(2567);
+  const [comparisonYear2, setComparisonYear2] = useState(2568);
   const { data, loading, error } = useHealthData();
+  const availableYears = [2562, 2563, 2564, 2565, 2566, 2567, 2568];
 
   if (loading) {
     return (
@@ -70,10 +76,13 @@ export default function Home() {
             />
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-6">
-                Disease Analysis
-              </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-800 font-poppins">
+                  Disease Analysis
+                </h2>
+                <ExportPDF elementId="disease-analysis-section" fileName="Disease_Analysis" title="Export Disease Analysis" />
+              </div>
+              <div id="disease-analysis-section" className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                 <div className="lg:col-span-2">
                   <DiseaseChart data={diseases} title="Top 10 Diseases by DALY Impact" />
                 </div>
@@ -114,10 +123,15 @@ export default function Home() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-6">
-                District Health Status
-              </h2>
-              <DistrictTable data={districts} title="Health Metrics by District" />
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-800 font-poppins">
+                  District Health Status
+                </h2>
+                <ExportPDF elementId="district-section" fileName="District_Health_Status" title="Export District Data" />
+              </div>
+              <div id="district-section">
+                <DistrictTable data={districts} title="Health Metrics by District" />
+              </div>
             </section>
           </div>
         )}

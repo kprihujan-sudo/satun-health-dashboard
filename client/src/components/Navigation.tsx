@@ -72,36 +72,35 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden py-4">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center gap-2 w-full bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg font-medium"
-          >
-            <span className="text-xl">{menuItems.find(m => m.id === activeTab)?.icon}</span>
-            <span>{menuItems.find(m => m.id === activeTab)?.label}</span>
-            <ChevronDown className={`ml-auto transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-          </button>
+        <div className="md:hidden">
+          <div className="flex items-center justify-between py-2 mb-2">
+            <span className="text-sm font-bold font-poppins truncate">📊 Satun Health Dashboard</span>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="ml-2 p-2 bg-blue-700 hover:bg-blue-600 rounded-lg"
+            >
+              <ChevronDown className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} size={20} />
+            </button>
+          </div>
 
           {isOpen && (
-            <div className="mt-2 space-y-2 bg-blue-800 p-3 rounded-lg">
+            <div className="grid grid-cols-2 gap-2 bg-blue-800 p-2 rounded-lg max-h-96 overflow-y-auto">
               {menuItems.map((item) => (
-                  <button
+                <button
                   key={item.id}
                   onClick={() => {
                     onTabChange(item.id as MenuTab);
                     setIsOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-2 py-2 rounded text-xs font-medium transition-all text-center ${
                     activeTab === item.id
                       ? 'bg-teal-500 text-white'
                       : 'bg-blue-700 hover:bg-blue-600 text-blue-100'
                   }`}
+                  title={item.thaiLabel}
                 >
-                  <span className="mr-2">{item.icon}</span>
-                  <div>
-                    <div className="font-medium">{item.label}</div>
-                    <div className="text-xs opacity-80">{item.thaiLabel}</div>
-                  </div>
+                  <div className="text-lg mb-1">{item.icon}</div>
+                  <div className="line-clamp-2">{item.label}</div>
                 </button>
               ))}
             </div>
