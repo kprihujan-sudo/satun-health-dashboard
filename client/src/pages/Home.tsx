@@ -8,7 +8,7 @@ import { DistrictTable } from '@/components/DistrictTable';
 import { LEHALETrendChart } from '@/components/LEHALETrendChart';
 import { SpecificDiseasesTable } from '@/components/SpecificDiseasesTable';
 import { DiseaseDistrictMatrix } from '@/components/DiseaseDistrictMatrix';
-import { MOPHGroupsTable } from '@/components/MOPHGroupsTable';
+
 import { DiseaseDetailsChart } from '@/components/DiseaseDetailsChart';
 import { DiseaseGroupAnalysis } from '@/components/DiseaseGroupAnalysis';
 import { AverageAgeChart } from '@/components/AverageAgeChart';
@@ -54,7 +54,7 @@ export default function Home() {
     );
   }
 
-  const { overview, diseases, districts, le_hale_trend, specific_diseases, disease_district_matrix, moph_groups } = data;
+  const { overview, diseases, districts, le_hale_trend, specific_diseases, disease_district_matrix } = data;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -313,7 +313,7 @@ export default function Home() {
                 'โรคที่มี Share_DALY_% สูง = โรคที่ส่งผลกระทบต่อสุขภาพมากที่สุด'
               ]}
             />
-            {diseases && <DiseaseDetailsChart data={diseases} />}
+            {diseases && <DiseaseDetailsChart diseases={diseases} />}
           </div>
         )}
 
@@ -451,25 +451,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* MOPH Disease Groups Tab */}
-        {activeTab === 'moph-groups' && (
-          <div className="space-y-8">
-            <h1 className="text-3xl font-bold text-gray-800 font-poppins">
-              📋 MOPH Disease Groups (กลุ่มโรคสสส.)
-            </h1>
-            <AnalysisDescription
-              title={thaiLabels.mophGroups}
-              description="จำแนกโรคตามมาตรฐานของกระทรวงสาธารณสุข รวมถึง โรคติดเชื้อ โรคไม่ติดเชื้อ และอื่นๆ"
-              keyPoints={[
-                'โรคติดเชื้อ = โรคที่เกิดจากเชื้อโรค',
-                'โรคไม่ติดเชื้อ = โรคเรื้อรัง เช่น มะเร็ง ความดันโลหิตสูง',
-                'อุบัติเหตุและการบาดเจ็บ = ผลจากการตกลง การชน เป็นต้น',
-                'ข้อมูลอื่นๆ = ข้อมูลที่ไม่สามารถจำแนกได้'
-              ]}
-            />
-            {moph_groups && <MOPHGroupsTable data={moph_groups} />}
-          </div>
-        )}
+
       </main>
 
       {/* Footer */}

@@ -17,6 +17,14 @@ interface DiseaseDetailsChartProps {
 }
 
 export function DiseaseDetailsChart({ diseases }: DiseaseDetailsChartProps) {
+  if (!diseases || diseases.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-gray-500">No disease data available</p>
+      </div>
+    );
+  }
+
   const chartData = diseases.map(d => ({
     name: d.Disease_group,
     Deaths: d.Deaths,

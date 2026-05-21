@@ -13,8 +13,7 @@ export type MenuTab =
   | 'district-analysis' 
   | 'district-comparison'
   | 'disease-matrix' 
-  | 'specific-diseases' 
-  | 'moph-groups';
+  | 'specific-diseases';
 
 interface NavigationProps {
   activeTab: MenuTab;
@@ -37,7 +36,7 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
     { id: 'district-comparison', label: 'District Comparison', thaiLabel: 'เปรียบเทียบอำเภอ', icon: '⚖️' },
     { id: 'disease-matrix', label: 'Disease × District Matrix', thaiLabel: 'เมทริกซ์โรค × อำเภอ', icon: '🔗' },
     { id: 'specific-diseases', label: 'Specific Diseases', thaiLabel: 'โรคเฉพาะ', icon: '🔬' },
-    { id: 'moph-groups', label: 'MOPH Disease Groups', thaiLabel: 'กลุ่มโรคสสส.', icon: '📋' },
+
   ];
 
   return (
