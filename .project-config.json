@@ -1,0 +1,35 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [],
+  "dev_command": "pnpm run dev",
+  "env_vars": {},
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663563190258/SrYKdXrZM9co4J9gnuPjS2",
+    "access_key_id": "ASIAZV3A2ECZG5ZY7ISA",
+    "secret_access_key": "iAOcixW1cQanCJA0ITNRYnqyYIct3yf93A9JnHsX",
+    "session_token": "IQoJb3JpZ2luX2VjEDoaCXVzLWVhc3QtMSJHMEUCIHy1jjkZM/lK8xoMWGlaF7GMrv1/muXqIVYDAnjV0Kq3AiEAv8TTWyxXUKVUAvChJKag44JUJ2gbS0AytHu0JKMWC9kq9gMIAxAEGgw2NjUzODYwOTg4NjYiDEWeXkOncTHmBLt3zirTA/4bIh2OEzpMOrb+Fg6mFkSTIRI/9adB5CAWIoLuOf56fsw0DwUlx5HqGhMx+e9J4/jjewegOqV2UgE4BougVP6hizm8Djml+azWa59S3PuNG2+NeIewCNMHfFrdhetdtcV+32gDW/kq50UgF7iYvcTnRxQAYYaTslO+L39XCxQkFohtJCMphjzxGIQ6uvyfyKKN2rox5dznSsXSgBClorIRJ394Oc4KFXqJoKmuAMU0YhBXO59qbiNyUoIDr9ly3/Cl3EOrKm2TgbOb6pI1r9+706LUWsV2CknL8w3mgty0Fdii63cF8yjuak2HM/9ntJhRwEQ8vCRaX7PHtKwM4ver4ORqIRu5/+dcVNZ6rqyBRJWPq+Ou7/vw6qAans0gN3HE2dmUeFaSEwFTviYBlRW3GvC4ns7jCsEUxrV09/fgiSDeSEyvONnEFKXeQa290jQoUIArjrdjP9EbtsBk9ywe0qY9AI6X/f3hExxfx81X1kK3u/0vfsv0yaydlDFNZVjDr4esoXRsikaCIkw6n2ICL8pu+wp2JprZo/rzitHDPxBe1tOclFocIFjgIaWyh5Ump8MZ4hve7PDcV9CJRwl002JZeo7EvmPwWNxgIRVqrty/MK6ou9AGOp0BBlXfDI32GXvdPsrTyiC2985dpUi24/oLYQ8br8E6YrjTC3qGskXWHbruWJKiVyEmthtak8yusMMe1LKmS6zR8idl7mWgDXOgvqwDBxe+XNex9zsRG0/WyXkU8cdYae9MFdX1HTgo9or+V0dNpYNJLLHVZWP1UakAqNJoyHoyPp8d+Vc7kj9Zl5gRt0ecJMMd3qrCzIe+qvoF7M96/A==",
+    "expiration": "2026-05-21T21:45:18.000Z"
+  },
+  "name": "satun-health-dashboard",
+  "path": "/home/ubuntu/satun-health-dashboard",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "2X9ur6eV2xyZ2iQdNsKYQo",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "oFcEd5goEseoYsPoEuU6Nw",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "KASEM PRIHUJAN",
+    "OWNER_OPEN_ID": "F2MmeAR5szrZHzWv8dpkun",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "878e48f8-0805-48ea-97da-4446a4357f76",
+    "VITE_APP_ID": "SrYKdXrZM9co4J9gnuPjS2",
+    "VITE_APP_LOGO": "",
+    "VITE_APP_TITLE": "Satun Health Dashboard",
+    "VITE_FRONTEND_FORGE_API_KEY": "k3kVQ5xzc2HjnvifRmieAC",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-static",
+  "test_command": "pnpm test"
+}
