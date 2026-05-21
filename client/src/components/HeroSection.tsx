@@ -35,13 +35,13 @@ export function HeroSection({
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent"></div>
         <div className="absolute inset-0 flex flex-col justify-center px-8">
           <h1 className="text-4xl font-bold text-white font-poppins mb-2">
-            Satun Province Health Dashboard
+            Burden of Disease and Population Health Status Dashboard
           </h1>
           <p className="text-xl text-teal-200 font-poppins">
-            Health Data Analysis Year {year}
+            แดชบอร์ดวิเคราะห์ภาระโรคและสถานะสุขภาพประชากร
           </p>
           <p className="text-sm text-gray-200 mt-4">
-            Comprehensive health metrics and disease surveillance
+            Health Data Analysis Year {year} | วิเคราะห์ข้อมูลสุขภาพประจำปี {year}
           </p>
         </div>
       </div>
