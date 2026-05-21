@@ -47,8 +47,8 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
         <div className="hidden md:flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
             <div>
-              <span className="text-2xl font-bold font-poppins block">📊 Burden of Disease and Population Health Status Dashboard</span>
-              <span className="text-sm text-teal-200 font-poppins">แดชบอร์ดวิเคราะห์ภาระโรคและสถานะสุขภาพประชากร</span>
+              <span className="text-2xl font-bold font-poppins block">📊 Burden of Disease and Population Health Status Dashboard - Satun</span>
+              <span className="text-sm text-teal-200 font-poppins">แดชบอร์ดวิเคราะห์ภาระโรคและสถานะสุขภาพประชากร จังหวัดสตูล</span>
             </div>
           </div>
           <div className="flex items-center gap-1 flex-wrap justify-end">

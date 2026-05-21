@@ -331,15 +331,27 @@ export default function Home() {
           <p className="text-sm text-gray-700 mb-3">
             This comprehensive health dashboard presents data for Satun Province covering multiple dimensions of health status including mortality, disability, life expectancy, and disease burden. The dashboard integrates data from multiple sources and provides trend analysis for strategic health planning.
           </p>
-          <p className="text-xs text-gray-600">
-            <strong>Data Source:</strong> Satun Province Health Department | <strong>Years Covered:</strong> 2562-2568 | <strong>Last Updated:</strong> 2025
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-blue-200">
+            <div>
+              <p className="text-xs text-gray-600 font-semibold mb-2">📊 Developed by:</p>
+              <p className="text-sm text-gray-700 font-semibold">KASEM PRIHUJAN</p>
+              <p className="text-xs text-gray-600">Digital Health Sub-division</p>
+              <p className="text-xs text-gray-600">Satun Provincial Health Office (สสจ.สตูล)</p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-600 font-semibold mb-2">📋 Data Information:</p>
+              <p className="text-xs text-gray-600"><strong>Data Source:</strong> Satun Province Health Department</p>
+              <p className="text-xs text-gray-600"><strong>Years Covered:</strong> 2562-2568</p>
+              <p className="text-xs text-gray-600"><strong>Last Updated:</strong> 2025</p>
+            </div>
+          </div>
         </section>
       </main>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-6 px-4 text-center text-sm">
-        <p>&copy; 2025 Satun Province Health Dashboard. All rights reserved.</p>
+        <p>&copy; 2025 Burden of Disease and Population Health Status Dashboard - Satun. All rights reserved.</p>
+        <p className="text-xs text-gray-400 mt-2">Developed by: KASEM PRIHUJAN | Digital Health Sub-division, Satun Provincial Health Office</p>
       </footer>
     </div>
   );
