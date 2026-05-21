@@ -18,9 +18,9 @@ import { LEHALEGapVisualization } from '@/components/LEHALEGapVisualization';
 import { ExportPDF } from '@/components/ExportPDF';
 import { SummaryStatistics } from '@/components/SummaryStatistics';
 import { AlertBanner } from '@/components/AlertBanner';
-import { RankingTable } from '@/components/RankingTable';
+
 import { AnalysisDescription } from '@/components/AnalysisDescription';
-import { DistrictMap } from '@/components/DistrictMap';
+
 import { thaiLabels } from '@/data/thai-labels';
 import { Spinner } from '@/components/ui/spinner';
 
@@ -118,36 +118,14 @@ export default function Home() {
               ]}
             />
 
-            {/* District Rankings */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <RankingTable
-                title="🔴 อำเภอที่มีความเสี่ยงสูงสุด"
-                type="top"
-                description="อำเภอที่มีอัตรา DALY สูงสุด (ภาระโรคมากที่สุด)"
-                items={districts
-                  .sort((a: any, b: any) => b.DALY_rate - a.DALY_rate)
-                  .slice(0, 5)
-                  .map((d: any, idx: number) => ({
-                    rank: idx + 1,
-                    name: d.District,
-                    value: d.DALY_rate,
-                    unit: 'ต่อ 100k'
-                  }))}
-              />
-              <RankingTable
-                title="🟢 อำเภอที่มีความเสี่ยงต่ำสุด"
-                type="bottom"
-                description="อำเภอที่มีอัตรา DALY ต่ำสุด (ภาระโรคน้อยที่สุด)"
-                items={districts
-                  .sort((a: any, b: any) => a.DALY_rate - b.DALY_rate)
-                  .slice(0, 5)
-                  .map((d: any, idx: number) => ({
-                    rank: idx + 1,
-                    name: d.District,
-                    value: d.DALY_rate,
-                    unit: 'ต่อ 100k'
-                  }))}
-              />
+            {/* Analysis Summary */}
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border-2 border-blue-200">
+              <h3 className="text-lg font-bold text-gray-800 font-poppins mb-4">📊 สรุปวิเคราะห์ภาพรวม</h3>
+              <div className="space-y-3 text-sm text-gray-700">
+                <p><strong>ภาระโรคสูงสุด:</strong> อำเภอเมืองสตูล (13,762.6 ต่อ 100,000 คน) และ ละงู (13,561.8 ต่อ 100,000 คน)</p>
+                <p><strong>โรคที่สำคัญที่สุด:</strong> มะเร็ง (17.21% ของ DALY) และ โรคไม่ทราบสาเหตุ (18.64% ของ DALY)</p>
+                <p><strong>ข้อเสนอแนะ:</strong> ควรเพิ่มโปรแกรมป้องกันมะเร็ง ลดอุบัติเหตุ และตรวจสอบสาเหตุการตายที่ไม่ชัดเจน</p>
+              </div>
             </div>
 
             <section>
@@ -221,15 +199,18 @@ export default function Home() {
                 interpretation={thaiLabels.districtHealth.interpretation}
               />
 
-              <DistrictMap districts={districts.map((d: any) => ({
-                name: d.District,
-                dalyRate: d.DALY_rate,
-                deathRate: d.Death_rate,
-                population: d.Population
-              }))} />
-
               <div id="district-section" className="mt-6">
                 <DistrictTable data={districts} />
+              </div>
+            </section>
+
+            {/* District Analysis Summary */}
+            <section className="mt-8 bg-gradient-to-br from-teal-50 to-green-50 p-6 rounded-lg border-2 border-teal-200">
+              <h3 className="text-lg font-bold text-gray-800 font-poppins mb-4">📊 สรุปวิเคราะห์สถานะสุขภาพอำเภอ</h3>
+              <div className="space-y-3 text-sm text-gray-700">
+                <p><strong>อำเภอที่มีความเสี่ยงสูงสุด:</strong> เมืองสตูล ละงู ทุ่งหว้า ควนโดน ควนกาหลง (DALY rate {'>'} 13,300)</p>
+                <p><strong>อำเภอที่มีความเสี่ยงต่ำสุด:</strong> ท่าแพ (DALY rate = 11,754.9)</p>
+                <p><strong>ข้อเสนอแนะ:</strong> ต้องมีการเพิ่มโปรแกรมสุขภาพเฉพาะเจาะจงในอำเภอที่มีความเสี่ยงสูง โดยเฉพาะการป้องกันมะเร็ง ลดอุบัติเหตุ และการดูแลผู้สูงอายุ</p>
               </div>
             </section>
 
