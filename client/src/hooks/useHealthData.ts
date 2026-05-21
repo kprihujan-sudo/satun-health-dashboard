@@ -32,8 +32,12 @@ export interface HealthData {
     DALY_rate_per100k: number;
     Risk_level: string;
   }>;
-  le_hale: Array<Record<string, any>>;
-  integrated: Array<Record<string, any>>;
+  le_hale_trend: Array<Record<string, any>>;
+  specific_diseases: Array<Record<string, any>>;
+  disease_district_matrix: Array<Record<string, any>>;
+  moph_groups: Array<Record<string, any>>;
+  le_hale?: Array<Record<string, any>>;
+  integrated?: Array<Record<string, any>>;
 }
 
 export function useHealthData() {

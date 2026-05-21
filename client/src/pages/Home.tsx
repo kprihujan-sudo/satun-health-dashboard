@@ -9,6 +9,12 @@ import { LEHALETrendChart } from '@/components/LEHALETrendChart';
 import { SpecificDiseasesTable } from '@/components/SpecificDiseasesTable';
 import { DiseaseDistrictMatrix } from '@/components/DiseaseDistrictMatrix';
 import { MOPHGroupsTable } from '@/components/MOPHGroupsTable';
+import { DiseaseDetailsChart } from '@/components/DiseaseDetailsChart';
+import { DiseaseGroupAnalysis } from '@/components/DiseaseGroupAnalysis';
+import { AverageAgeChart } from '@/components/AverageAgeChart';
+import { MortalityTrends } from '@/components/MortalityTrends';
+import { DistrictComparison } from '@/components/DistrictComparison';
+import { LEHALEGapVisualization } from '@/components/LEHALEGapVisualization';
 import { Spinner } from '@/components/ui/spinner';
 
 /**
@@ -116,6 +122,23 @@ export default function Home() {
           </div>
         )}
 
+        {/* LE-HALE Gap Analysis Tab */}
+        {activeTab === 'le-hale-gap' && (
+          <div className="space-y-8">
+            <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
+                LE-HALE Gap Analysis
+              </h2>
+              <p className="text-gray-700">
+                Analysis of the gap between Life Expectancy (LE) and Healthy Life Expectancy (HALE) - years lived with disability or poor health
+              </p>
+            </div>
+            {le_hale_trend && le_hale_trend.length > 0 && (
+              <LEHALEGapVisualization leHaleTrend={le_hale_trend} />
+            )}
+          </div>
+        )}
+
         {/* LE/HALE Trend Tab */}
         {activeTab === 'le-hale-trend' && (
           <div className="space-y-8">
@@ -149,6 +172,74 @@ export default function Home() {
           </div>
         )}
 
+        {/* Disease Details Tab */}
+        {activeTab === 'disease-details' && (
+          <div className="space-y-8">
+            <div className="bg-cyan-50 border-2 border-cyan-200 rounded-lg p-6 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
+                Disease Details
+              </h2>
+              <p className="text-gray-700">
+                Detailed analysis of each disease group with comprehensive statistics
+              </p>
+            </div>
+            {diseases && diseases.length > 0 && (
+              <DiseaseDetailsChart diseases={diseases} />
+            )}
+          </div>
+        )}
+
+        {/* Disease Group Analysis Tab */}
+        {activeTab === 'disease-groups' && (
+          <div className="space-y-8">
+            <div className="bg-violet-50 border-2 border-violet-200 rounded-lg p-6 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
+                Disease Group Analysis
+              </h2>
+              <p className="text-gray-700">
+                Analysis of disease burden distribution and ranking by DALY impact
+              </p>
+            </div>
+            {diseases && diseases.length > 0 && (
+              <DiseaseGroupAnalysis diseases={diseases} />
+            )}
+          </div>
+        )}
+
+        {/* Average Age at Death Tab */}
+        {activeTab === 'average-age' && (
+          <div className="space-y-8">
+            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
+                Average Age at Death
+              </h2>
+              <p className="text-gray-700">
+                Analysis of average age at death by disease and age group classification
+              </p>
+            </div>
+            {specific_diseases && specific_diseases.length > 0 && (
+              <AverageAgeChart diseases={specific_diseases} />
+            )}
+          </div>
+        )}
+
+        {/* Mortality Trends Tab */}
+        {activeTab === 'mortality-trends' && (
+          <div className="space-y-8">
+            <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
+                Mortality Trends
+              </h2>
+              <p className="text-gray-700">
+                7-year trend analysis of mortality patterns and health status indicators
+              </p>
+            </div>
+            {le_hale_trend && le_hale_trend.length > 0 && (
+              <MortalityTrends leHaleTrend={le_hale_trend} />
+            )}
+          </div>
+        )}
+
         {/* District Analysis Tab */}
         {activeTab === 'district-analysis' && (
           <div className="space-y-8">
@@ -161,6 +252,23 @@ export default function Home() {
               </p>
             </div>
             <DistrictTable data={districts} title="District Health Status" />
+          </div>
+        )}
+
+        {/* District Comparison Tab */}
+        {activeTab === 'district-comparison' && (
+          <div className="space-y-8">
+            <div className="bg-lime-50 border-2 border-lime-200 rounded-lg p-6 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-2">
+                District Comparison
+              </h2>
+              <p className="text-gray-700">
+                Comparative analysis of health metrics across all districts with risk assessment
+              </p>
+            </div>
+            {districts && districts.length > 0 && (
+              <DistrictComparison districts={districts} />
+            )}
           </div>
         )}
 

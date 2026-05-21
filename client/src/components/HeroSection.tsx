@@ -79,7 +79,7 @@ export function HeroSection({
       </div>
 
       {/* Life Expectancy Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         <MetricCard
           title="Life Expectancy (LE)"
           value={formatDecimal(le, 2)}
@@ -91,6 +91,12 @@ export function HeroSection({
           value={formatDecimal(hale, 2)}
           subtitle="Expected years in good health"
           color="teal"
+        />
+        <MetricCard
+          title="LE-HALE Gap"
+          value={formatDecimal(le - hale, 2)}
+          subtitle="Years with disability/poor health"
+          color="red"
         />
       </div>
     </div>

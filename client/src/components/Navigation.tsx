@@ -4,8 +4,14 @@ import { ChevronDown } from 'lucide-react';
 export type MenuTab = 
   | 'overview' 
   | 'le-hale-trend' 
+  | 'le-hale-gap'
   | 'disease-summary' 
+  | 'disease-details'
+  | 'disease-groups'
+  | 'average-age'
+  | 'mortality-trends'
   | 'district-analysis' 
+  | 'district-comparison'
   | 'disease-matrix' 
   | 'specific-diseases' 
   | 'moph-groups';
@@ -20,9 +26,15 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
 
   const menuItems = [
     { id: 'overview', label: 'Overview', icon: '📊' },
+    { id: 'le-hale-gap', label: 'LE-HALE Gap Analysis', icon: '❤️' },
     { id: 'le-hale-trend', label: 'LE/HALE Trend (7 Years)', icon: '📈' },
     { id: 'disease-summary', label: 'Disease Summary', icon: '🏥' },
+    { id: 'disease-details', label: 'Disease Details', icon: '🔍' },
+    { id: 'disease-groups', label: 'Disease Group Analysis', icon: '📊' },
+    { id: 'average-age', label: 'Average Age at Death', icon: '👥' },
+    { id: 'mortality-trends', label: 'Mortality Trends', icon: '📉' },
     { id: 'district-analysis', label: 'District Analysis', icon: '🗺️' },
+    { id: 'district-comparison', label: 'District Comparison', icon: '⚖️' },
     { id: 'disease-matrix', label: 'Disease × District Matrix', icon: '🔗' },
     { id: 'specific-diseases', label: 'Specific Diseases', icon: '🔬' },
     { id: 'moph-groups', label: 'MOPH Disease Groups', icon: '📋' },
