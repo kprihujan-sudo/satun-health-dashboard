@@ -1,15 +1,22 @@
 {
   "build_command": "pnpm run build",
-  "capabilities": [],
+  "capabilities": [
+    "db",
+    "server",
+    "user"
+  ],
   "dev_command": "pnpm run dev",
-  "env_vars": {},
+  "env_vars": {
+    "DATABASE_URL": "mysql://3FWdNtp75y8FMYX.7a9b4c79fc29:sOR50z935Afo8pNSZcOS@gateway06.us-east-1.prod.aws.tidbcloud.com:4000/SrYKdXrZM9co4J9gnuPjS2?ssl={\"rejectUnauthorized\":true}",
+    "DRIZZLE_DATABASE_URL": "mysql://3FWdNtp75y8FMYX.7a9b4c79fc29:sOR50z935Afo8pNSZcOS@gateway06.us-east-1.prod.aws.tidbcloud.com:4000/SrYKdXrZM9co4J9gnuPjS2?ssl={\"rejectUnauthorized\":true}"
+  },
   "experiments": null,
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663563190258/SrYKdXrZM9co4J9gnuPjS2",
-    "access_key_id": "ASIAZV3A2ECZG5ZY7ISA",
-    "secret_access_key": "iAOcixW1cQanCJA0ITNRYnqyYIct3yf93A9JnHsX",
-    "session_token": "IQoJb3JpZ2luX2VjEDoaCXVzLWVhc3QtMSJHMEUCIHy1jjkZM/lK8xoMWGlaF7GMrv1/muXqIVYDAnjV0Kq3AiEAv8TTWyxXUKVUAvChJKag44JUJ2gbS0AytHu0JKMWC9kq9gMIAxAEGgw2NjUzODYwOTg4NjYiDEWeXkOncTHmBLt3zirTA/4bIh2OEzpMOrb+Fg6mFkSTIRI/9adB5CAWIoLuOf56fsw0DwUlx5HqGhMx+e9J4/jjewegOqV2UgE4BougVP6hizm8Djml+azWa59S3PuNG2+NeIewCNMHfFrdhetdtcV+32gDW/kq50UgF7iYvcTnRxQAYYaTslO+L39XCxQkFohtJCMphjzxGIQ6uvyfyKKN2rox5dznSsXSgBClorIRJ394Oc4KFXqJoKmuAMU0YhBXO59qbiNyUoIDr9ly3/Cl3EOrKm2TgbOb6pI1r9+706LUWsV2CknL8w3mgty0Fdii63cF8yjuak2HM/9ntJhRwEQ8vCRaX7PHtKwM4ver4ORqIRu5/+dcVNZ6rqyBRJWPq+Ou7/vw6qAans0gN3HE2dmUeFaSEwFTviYBlRW3GvC4ns7jCsEUxrV09/fgiSDeSEyvONnEFKXeQa290jQoUIArjrdjP9EbtsBk9ywe0qY9AI6X/f3hExxfx81X1kK3u/0vfsv0yaydlDFNZVjDr4esoXRsikaCIkw6n2ICL8pu+wp2JprZo/rzitHDPxBe1tOclFocIFjgIaWyh5Ump8MZ4hve7PDcV9CJRwl002JZeo7EvmPwWNxgIRVqrty/MK6ou9AGOp0BBlXfDI32GXvdPsrTyiC2985dpUi24/oLYQ8br8E6YrjTC3qGskXWHbruWJKiVyEmthtak8yusMMe1LKmS6zR8idl7mWgDXOgvqwDBxe+XNex9zsRG0/WyXkU8cdYae9MFdX1HTgo9or+V0dNpYNJLLHVZWP1UakAqNJoyHoyPp8d+Vc7kj9Zl5gRt0ecJMMd3qrCzIe+qvoF7M96/A==",
-    "expiration": "2026-05-21T21:45:18.000Z"
+    "access_key_id": "ASIAZV3A2ECZPQ2MHW24",
+    "secret_access_key": "L/otMt+/G9L54FGJLBqw3V9wvnwksX1koF+MFf8i",
+    "session_token": "IQoJb3JpZ2luX2VjEKz//////////wEaCXVzLWVhc3QtMSJGMEQCIDXzysU5bZ/r2fH7vi9c+6A40DdyIqK7SfTndd+elRdyAiBrPX0JKAYK3imtJrie8u/IqLYmxh3Rhh34cBS990BHcSr2Awh0EAQaDDY2NTM4NjA5ODg2NiIMpHk/YsOrnHoFgk3xKtMDC8NLygu0FiuvtnCgaA81i2tKyskjMvcGgW2bkKvYxetMmlBZ47dL/coiAaCGA8lc3Mjq4btGzttUYl7fzPgmpsaZsjE7sWjxtr9gX0iEOTN3wW8r8x2RhOMqNitPotRqN1jQEP/+wMBPRzNpPbFyjbXNHpTGx7NN1fXlyohtfMDRIX3bAMl9X4fB7VY1UBGBNzVNaav8+wrUVUFIfDsrobKS1y0XjQUPEDrlEC4ujzJiHl5ip2+ybMvck/C+Rd9Hia4n2EL3Jh8uGHahjYI7v46JbzzGm2nOcxOzT9lAYTDLe6L1GSpz75PDLhzSZr870ZjaLTOrpWvXepmabKIn6iOvLFmF+8Z6d5R85GQzBvpILp4mxrs2+QZHyN+RdLqZV7sm5KnJI0+uyHTWZfbSWmr11Xcu60FAyVEj4TqiyNlNHImwWOy4D9y02Aul7tF1D7NR67H/0qYk1NzOkfeMch7F4LN60bdzIIymaHuMPwqT5gN2MfB8s4FOop5xU//BetrYbGYYkcM20HvfA6B7vubSrV6kIX6vnPBbUlcvv/+CQ/wpuuielBfWAGGFcDW7dOCTrZtl8I6gj270+6nocA+AucQ+rICzneuxwvKNI3/NkE4w957U0AY6ngEfA9gAUMG8h/rZFXnQ0/w5rZ9IML2ofq4gANFD1jCt7kYo3xkdlBvIDj6sxIt3M3/+IqZKhy1UAggydJ1doDaXU7VFw97FbBXlCStGW1C7VNAp9KmAR9X+6So/j9Bfo5qSIZ4iGTz78COWTGSFlTj7ovZlr1uE/kyo6W3OI05XH3421StBdk7MumMBeWn4MXeu6CdfuLFW/RPUUR4p5w==",
+    "expiration": "2026-05-26T15:11:51.000Z"
   },
   "name": "satun-health-dashboard",
   "path": "/home/ubuntu/satun-health-dashboard",
@@ -24,7 +31,7 @@
     "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
     "VITE_ANALYTICS_WEBSITE_ID": "878e48f8-0805-48ea-97da-4446a4357f76",
     "VITE_APP_ID": "SrYKdXrZM9co4J9gnuPjS2",
-    "VITE_APP_LOGO": "",
+    "VITE_APP_LOGO": "https://files.manuscdn.com/user_upload_by_module/web_dev_logo/310519663563190258/nVKThaJhlbtAOXAc.png",
     "VITE_APP_TITLE": "Satun Health Dashboard",
     "VITE_FRONTEND_FORGE_API_KEY": "k3kVQ5xzc2HjnvifRmieAC",
     "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",

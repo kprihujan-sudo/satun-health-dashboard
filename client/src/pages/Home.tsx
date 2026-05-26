@@ -8,7 +8,6 @@ import { DistrictTable } from '@/components/DistrictTable';
 import { LEHALETrendChart } from '@/components/LEHALETrendChart';
 import { SpecificDiseasesTable } from '@/components/SpecificDiseasesTable';
 import { DiseaseDistrictMatrix } from '@/components/DiseaseDistrictMatrix';
-
 import { DiseaseDetailsChart } from '@/components/DiseaseDetailsChart';
 import { DiseaseGroupAnalysis } from '@/components/DiseaseGroupAnalysis';
 import { AverageAgeChart } from '@/components/AverageAgeChart';
@@ -18,9 +17,7 @@ import { LEHALEGapVisualization } from '@/components/LEHALEGapVisualization';
 import { ExportPDF } from '@/components/ExportPDF';
 import { SummaryStatistics } from '@/components/SummaryStatistics';
 import { AlertBanner } from '@/components/AlertBanner';
-
 import { AnalysisDescription } from '@/components/AnalysisDescription';
-
 import { thaiLabels } from '@/data/thai-labels';
 import { Spinner } from '@/components/ui/spinner';
 
@@ -136,7 +133,6 @@ export default function Home() {
                 <ExportPDF elementId="disease-analysis-section" fileName="Disease_Analysis" title="Export Disease Analysis" />
               </div>
               
-              {/* Analysis Description */}
               <AnalysisDescription
                 title="การวิเคราะห์โรคที่ส่งผลกระทบต่อประชากร"
                 description={thaiLabels.diseaseAnalysis.description}
@@ -149,33 +145,23 @@ export default function Home() {
                   <DiseaseChart data={diseases} title="Top 10 Diseases by DALY Impact" />
                 </div>
                 <div className="bg-gradient-to-br from-teal-50 to-blue-50 p-6 rounded-lg border-2 border-teal-200">
-                  <h3 className="text-lg font-bold text-gray-800 font-poppins mb-4">
-                    Key Insights
-                  </h3>
+                  <h3 className="text-lg font-bold text-gray-800 font-poppins mb-4">Key Insights</h3>
                   <ul className="space-y-3 text-sm text-gray-700">
                     <li className="flex items-start">
                       <span className="text-teal-600 font-bold mr-2">•</span>
-                      <span>
-                        <strong>Top Disease:</strong> Cancer leads with 17.21% of DALY burden
-                      </span>
+                      <span><strong>Top Disease:</strong> Cancer leads with 17.21% of DALY burden</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-600 font-bold mr-2">•</span>
-                      <span>
-                        <strong>Injury Impact:</strong> Accidents and injuries account for 12.14% of DALY
-                      </span>
+                      <span><strong>Injury Impact:</strong> Accidents and injuries account for 12.14% of DALY</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-red-600 font-bold mr-2">•</span>
-                      <span>
-                        <strong>Unknown Causes:</strong> {overview.unknown_cause} deaths from unknown causes (R99)
-                      </span>
+                      <span><strong>Unknown Causes:</strong> {overview.unknown_cause} deaths from unknown causes (R99)</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-blue-600 font-bold mr-2">•</span>
-                      <span>
-                        <strong>Life Expectancy:</strong> LE {overview.le} years, HALE {overview.hale} years
-                      </span>
+                      <span><strong>Life Expectancy:</strong> LE {overview.le} years, HALE {overview.hale} years</span>
                     </li>
                   </ul>
                 </div>
@@ -191,7 +177,6 @@ export default function Home() {
                 <ExportPDF elementId="district-section" fileName="District_Health_Status" title="Export District Data" />
               </div>
 
-              {/* Analysis Description */}
               <AnalysisDescription
                 title="สถานะสุขภาพของแต่ละอำเภอ"
                 description={thaiLabels.districtHealth.description}
@@ -204,7 +189,6 @@ export default function Home() {
               </div>
             </section>
 
-            {/* District Analysis Summary */}
             <section className="mt-8 bg-gradient-to-br from-teal-50 to-green-50 p-6 rounded-lg border-2 border-teal-200">
               <h3 className="text-lg font-bold text-gray-800 font-poppins mb-4">📊 สรุปวิเคราะห์สถานะสุขภาพอำเภอ</h3>
               <div className="space-y-3 text-sm text-gray-700">
@@ -214,11 +198,10 @@ export default function Home() {
               </div>
             </section>
 
-            {/* About This Dashboard */}
             <section className="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-lg border-2 border-blue-200">
               <h2 className="text-2xl font-bold text-gray-800 font-poppins mb-4">📊 About This Dashboard</h2>
               <p className="text-gray-700 mb-3">
-                This comprehensive health dashboard presents data for Satun Province covering multiple dimensions of health status including mortality, disability, life expectancy, and disease burden. The dashboard integrates data from multiple sources and provides trend analysis for strategic health planning.
+                This comprehensive health dashboard presents data for Satun Province covering multiple dimensions of health status including mortality, disability, life expectancy, and disease burden.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div>
@@ -248,14 +231,12 @@ export default function Home() {
             <h1 className="text-3xl font-bold text-gray-800 font-poppins">
               ❤️ LE-HALE Gap Analysis (วิเคราะห์ช่องว่าง LE-HALE)
             </h1>
-            
             <AnalysisDescription
               title={thaiLabels.leHaleGapAnalysis.title}
               description={thaiLabels.leHaleGapAnalysis.description}
               keyPoints={thaiLabels.leHaleGapAnalysis.keyPoints}
               interpretation={thaiLabels.leHaleGapAnalysis.interpretation}
             />
-
             {le_hale_trend && <LEHALEGapVisualization leHaleTrend={le_hale_trend} />}
           </div>
         )}
@@ -450,8 +431,6 @@ export default function Home() {
             {specific_diseases && <SpecificDiseasesTable data={specific_diseases} />}
           </div>
         )}
-
-
       </main>
 
       {/* Footer */}
