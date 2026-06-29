@@ -172,7 +172,7 @@ export default defineConfig({
     host: true,
     headers: {
       'X-Frame-Options': 'ALLOWALL',
-      'Content-Security-Policy': "frame-ancestors * 'self' https://*.powerbi.com https://*.powerapps.com https://*.microsoft.com https://*.microsoftonline.com https://*.azure.com https://*.office.com https://*.sharepoint.com",
+      'Content-Security-Policy': "frame-ancestors 'self' https: http: https://*.powerbi.com https://*.powerapps.com https://*.microsoft.com https://*.microsoftonline.com https://*.azure.com https://*.office.com https://*.sharepoint.com",
       'Access-Control-Allow-Origin': '*',
     },
     allowedHosts: [

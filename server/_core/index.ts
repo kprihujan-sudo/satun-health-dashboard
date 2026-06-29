@@ -39,7 +39,7 @@ async function startServer() {
   // ─── CORS for Power BI embedding ────────────────────────────────────────────
   app.use((_req, res, next) => {
     res.setHeader('X-Frame-Options', 'ALLOWALL');
-    res.setHeader('Content-Security-Policy', "frame-ancestors * 'self' https://*.powerbi.com https://*.powerapps.com https://*.microsoft.com https://*.microsoftonline.com https://*.azure.com https://*.office.com https://*.sharepoint.com");
+    res.setHeader('Content-Security-Policy', "frame-ancestors 'self' https: http: https://*.powerbi.com https://*.powerapps.com https://*.microsoft.com https://*.microsoftonline.com https://*.azure.com https://*.office.com https://*.sharepoint.com");
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
