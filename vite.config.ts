@@ -172,7 +172,7 @@ export default defineConfig({
     host: true,
     headers: {
       'X-Frame-Options': 'ALLOWALL',
-      'Content-Security-Policy': "frame-ancestors *",
+      'Content-Security-Policy': "frame-ancestors 'self' https: http:",
       'Access-Control-Allow-Origin': '*',
     },
     allowedHosts: [

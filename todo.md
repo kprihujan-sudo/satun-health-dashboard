@@ -27,3 +27,9 @@
 - [x] ลบลิงก์ Files ออกจาก Navigation (ไม่จำเป็นสำหรับ public dashboard)
 - [x] ลบ health-data.json local file
 - [x] ตรวจสอบ TypeScript: ไม่มี errors
+
+## CSP Fix for Power BI iframe
+
+- [x] แก้ไข Content-Security-Policy จาก "frame-ancestors *" เป็น "frame-ancestors 'self' https: http:" ใน server/_core/index.ts
+- [x] แก้ไข CSP ใน vite.config.ts ให้ตรงกัน
+- [x] ยืนยัน response headers ถูกต้อง: frame-ancestors 'self' https: http:
