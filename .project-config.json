@@ -13,10 +13,11 @@
   "experiments": null,
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663563190258/SrYKdXrZM9co4J9gnuPjS2",
-    "access_key_id": "ASIAZV3A2ECZPQ2MHW24",
-    "secret_access_key": "L/otMt+/G9L54FGJLBqw3V9wvnwksX1koF+MFf8i",
-    "session_token": "IQoJb3JpZ2luX2VjEKz//////////wEaCXVzLWVhc3QtMSJGMEQCIDXzysU5bZ/r2fH7vi9c+6A40DdyIqK7SfTndd+elRdyAiBrPX0JKAYK3imtJrie8u/IqLYmxh3Rhh34cBS990BHcSr2Awh0EAQaDDY2NTM4NjA5ODg2NiIMpHk/YsOrnHoFgk3xKtMDC8NLygu0FiuvtnCgaA81i2tKyskjMvcGgW2bkKvYxetMmlBZ47dL/coiAaCGA8lc3Mjq4btGzttUYl7fzPgmpsaZsjE7sWjxtr9gX0iEOTN3wW8r8x2RhOMqNitPotRqN1jQEP/+wMBPRzNpPbFyjbXNHpTGx7NN1fXlyohtfMDRIX3bAMl9X4fB7VY1UBGBNzVNaav8+wrUVUFIfDsrobKS1y0XjQUPEDrlEC4ujzJiHl5ip2+ybMvck/C+Rd9Hia4n2EL3Jh8uGHahjYI7v46JbzzGm2nOcxOzT9lAYTDLe6L1GSpz75PDLhzSZr870ZjaLTOrpWvXepmabKIn6iOvLFmF+8Z6d5R85GQzBvpILp4mxrs2+QZHyN+RdLqZV7sm5KnJI0+uyHTWZfbSWmr11Xcu60FAyVEj4TqiyNlNHImwWOy4D9y02Aul7tF1D7NR67H/0qYk1NzOkfeMch7F4LN60bdzIIymaHuMPwqT5gN2MfB8s4FOop5xU//BetrYbGYYkcM20HvfA6B7vubSrV6kIX6vnPBbUlcvv/+CQ/wpuuielBfWAGGFcDW7dOCTrZtl8I6gj270+6nocA+AucQ+rICzneuxwvKNI3/NkE4w957U0AY6ngEfA9gAUMG8h/rZFXnQ0/w5rZ9IML2ofq4gANFD1jCt7kYo3xkdlBvIDj6sxIt3M3/+IqZKhy1UAggydJ1doDaXU7VFw97FbBXlCStGW1C7VNAp9KmAR9X+6So/j9Bfo5qSIZ4iGTz78COWTGSFlTj7ovZlr1uE/kyo6W3OI05XH3421StBdk7MumMBeWn4MXeu6CdfuLFW/RPUUR4p5w==",
-    "expiration": "2026-05-26T15:11:51.000Z"
+    "access_key_id": "ASIAZV3A2ECZIGLWJHT3",
+    "secret_access_key": "Xlvri8qqvyB74DJidJ6aaAMIHXvHzVGZm10s4SKO",
+    "session_token": "IQoJb3JpZ2luX2VjEOD//////////wEaCXVzLWVhc3QtMSJHMEUCIGvI0DjnJu9RZ1cFkdU4yQAhBOuCq2hqqUUQF+7MieGQAiEA7icB1bR3u5woEicsyYESowY5/mFy55JlWSO7WW+73Fsq/wMIqf//////////ARAEGgw2NjUzODYwOTg4NjYiDBFlSQwQwAFs+W95PCrTA68lYtcQZBbvMJNV/K6r0jX90grNwfoEAc3t0FaJD/R2H0iBPub8KHKdVxuupSCq8HqsuCAWWOB3rxWCk0fzh+XPR8uUPY1IMgrGuqr+di9VeFew9zoWSfAusKQUcp5d1OZjrhff/D3c9/HqjgyZR8iDy+tv9IXly8didSqcaC8lGA/G3Qfp9UtBLK6CDwOTkbo4s/m/lt4ahHPInEXp5VLxwlDkuYWv7700/qcWKECx4Uyn/yod7a32iDgBRfgblzM60Ln0hE1f3WVR8guoBv+YSD+OalRaE5n0Lo5g3Gj/JYzKW3CMSZJyR4lKQz1+nCqWdZjWBsoIJQTxG7ux/TNyWSwxQxpvaBMIwQNghXJFtjcLQrSmUPbUIBT5NU3mo+dIIJontE6udfZSDLQhSbzlrUVwJ6TbPmkLOetk/mDOwAJtf5PDUDw7ony9ZFMj1B6gio1NASJD9NPejz11mQSloZtxZx5lwVZLB6apF7uv0iTJe6Dyzc/TsgwCgRNSLNvzSvSBQiG80xC7Mb1J/ODO/mTweI5EsXrSPP9c8PPwbmbg+mE5jZNantHtWCv2PvBCspNn6ZKynXZjoBOd0aF44adDsw9NijU9D0Cb6+T7Yli9MLXCiNIGOp0BTiSynBZ8nRRRxVGn+c0fnV5iaG5Rh+VHi9xlojJqXu9z06mHL1eT8okiE0NtTK7oPVtdjZk+vhZztIe4eu5E2rF4GPEfeplT3ACXSfLU2myUpagr5uxiW2euwH/VRStKoeWkcisS/YoFiMPOvSeBPJFtEIfMk8K4v5jBOetR/7TEJPmDCHodqaxLTsJwBT1l8DmHVC7w+aNf7OAVNQ==",
+    "expiration": "2026-06-29T19:39:33.000Z",
+    "backend": "GIT_BACKEND_S3"
   },
   "name": "satun-health-dashboard",
   "path": "/home/ubuntu/satun-health-dashboard",

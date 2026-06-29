@@ -170,6 +170,11 @@ export default defineConfig({
   },
   server: {
     host: true,
+    headers: {
+      'X-Frame-Options': 'ALLOWALL',
+      'Content-Security-Policy': "frame-ancestors *",
+      'Access-Control-Allow-Origin': '*',
+    },
     allowedHosts: [
       ".manuspre.computer",
       ".manus.computer",

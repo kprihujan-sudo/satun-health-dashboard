@@ -60,7 +60,7 @@ export function LEHALETrendChart({ data, title = 'Life Expectancy & Healthy Life
               />
               <Tooltip 
                 contentStyle={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
-                formatter={(value) => value.toFixed(2)}
+                formatter={(value) => (typeof value === 'number' ? value.toFixed(2) : value)}
               />
               <Legend />
               <Line 
@@ -115,7 +115,7 @@ export function LEHALETrendChart({ data, title = 'Life Expectancy & Healthy Life
               />
               <Tooltip 
                 contentStyle={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
-                formatter={(value) => value.toFixed(2)}
+                formatter={(value) => (typeof value === 'number' ? value.toFixed(2) : value)}
               />
               <Legend />
               <Line 

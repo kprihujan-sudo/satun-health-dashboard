@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, FolderOpen } from 'lucide-react';
-import { Link } from 'wouter';
+import { ChevronDown } from 'lucide-react';
 
 export type MenuTab = 
   | 'overview' 
@@ -52,14 +51,6 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
             </div>
           </div>
           <div className="flex items-center gap-1 flex-wrap justify-end">
-            <Link
-              href="/files"
-              className="px-3 py-2 rounded-lg text-sm font-medium transition-all bg-teal-700 hover:bg-teal-600 text-white flex items-center gap-1"
-              title="จัดการไฟล์"
-            >
-              <FolderOpen size={14} />
-              <span className="hidden lg:inline">Files</span>
-            </Link>
             {menuItems.map((item) => (
               <button
                 key={item.id}

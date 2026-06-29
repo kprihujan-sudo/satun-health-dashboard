@@ -126,7 +126,7 @@ export function MOPHGroupsTable({ data, title = 'MOPH Disease Groups (ICD-10 Cha
             <div className="text-3xl font-bold text-red-900">
               {formatNumber(cleanData.reduce((sum, row) => {
                 const deathsKey = rawColumns.find(k => columnMap[k] === 'Deaths');
-                return sum + (typeof row[deathsKey!] === 'number' ? row[deathsKey!] : 0);
+                return sum + (typeof row[deathsKey!] === 'number' ? (row[deathsKey!] as number) : 0);
               }, 0))}
             </div>
           </div>
